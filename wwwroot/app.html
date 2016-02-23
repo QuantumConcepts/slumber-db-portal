@@ -1,0 +1,35 @@
+<template>
+    <header class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a id="logo">
+                    <span>slumberDb</span>
+                    <span>Portal</span>
+                </a>
+            </div>
+            
+            <ul class="nav navbar-nav">
+                <li repeat.for="route of router.navigation" class="${router.isActive ? 'active' : ''}">
+                    <a href.bind="route.href">
+                        <span if.bind="true || route.icon != null" class="fa fa-${route.settings.icon}"></span> ${route.title}
+                    </a>
+                </li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="loader" if.bind="router.isNavigating">
+                    <span class="fa fa-spinner fa-spin fa-2x"></span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+    <section id="body-content">
+        <router-view></router-view>
+    </section>
+    
+    <footer>
+        <span class="copyright">&copy; ${copyrightYear} Quantum Concepts.</span>
+        <span class="version">${version}</span>
+    </footer>
+</template>

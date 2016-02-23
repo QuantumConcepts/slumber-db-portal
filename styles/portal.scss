@@ -1,0 +1,89 @@
+@import "variables";
+
+@mixin heading {
+    font-family: "Amaranth", sans-serif;
+    font-weight: 400;
+}
+
+@mixin section-shadow {
+    box-shadow: #000 0 0 10px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    margin: 0;
+    background-color: $primary4;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    
+    header {
+        @include section-shadow;
+        
+        margin-bottom: 0;
+        border-radius: 0;
+        background-color: $secondary3;
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        #logo {
+            @include heading;
+            
+            display: inline-block;
+            margin: 3px 40px 0 0;
+            font-size: 2em;
+            font-weight: 300;
+            color: $secondary2;
+            
+            span {
+                display: inline-block;
+            }
+            
+            span:last-child {
+                color: $secondary1;
+            }
+        }
+        
+        .navbar-nav {
+            li {
+                a {
+                    color: $gray2;
+                    text-decoration: none;
+                    
+                    &:hover,
+                    &:active {
+                        color: $gray0;
+                        background-color: $secondary2;
+                    }
+                    
+                    &:visited {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+    
+    #body-content {
+        flex: 1 0 auto;
+        color: #fff;
+    }
+    
+    footer {
+        @include section-shadow;
+        
+        flex: none;
+        height: 60px;
+        border-top: solid 1px $secondary4;
+        background-color: $secondary3;
+    }
+}
