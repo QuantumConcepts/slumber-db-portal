@@ -1,0 +1,45 @@
+<template>
+    <header class="page-header navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a id="logo">
+                    <span>slumberDb</span>
+                    <span>Portal</span>
+                </a>
+            </div>
+            
+            <ul class="nav navbar-nav">
+                <li repeat.for="route of router.navigation" class="${route.isActive ? 'active' : ''}">
+                    <a href.bind="route.href">
+                        <span if.bind="route.settings.icon" class="fa fa-${route.settings.icon}"></span> ${route.title}
+                    </a>
+                </li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="loader" if.bind="router.isNavigating">
+                    <span class="fa fa-spinner fa-spin fa-2x"></span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+    <div id="page-content">
+        <compose repeat.for="panel of panels" view-model.bind="panel" containerless></compose>
+    </div>
+    
+    <footer class="page-footer">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a href="https://github.com/QuantumConcepts/slumber-db-portal" target="_top"><span class="fa fa-github"></span> GitHub</a></li>
+                <li><a href="https://raw.githubusercontent.com/QuantumConcepts/slumber-db-portal/master/LICENSE" target="_top"><span class="fa fa-file-text-o"></span> License (AGPL)</a></li>
+            </ul>
+            
+            <div class="version">v${version}</div>
+        </div>
+    </footer>
+    
+    <div id="loading">
+        <div class="pong"></div>
+    </div>
+</template>

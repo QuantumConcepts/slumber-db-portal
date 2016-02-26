@@ -1,0 +1,15 @@
+<template>
+    <require from="./Panel"></require>
+    
+    <panel size="sm" header-text="Entities" close.call="close()">
+        <div class="button-list">
+            <div repeat.for="entity of entities">
+                <button click.delegate="openEntity(entity)" class="select">${entity.name}</button>
+            </div>
+        </div>
+        
+        <footer>
+            ${connectionInfo.name}/${databaseInfo.name}
+        </footer>
+    </panel>
+</template>

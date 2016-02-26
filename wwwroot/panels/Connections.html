@@ -1,0 +1,17 @@
+<template>
+    <require from="./Panel"></require>
+    <require from="../elements/Toolbar"></require>
+    
+    <panel size="sm" header-text="Connections" class="connections">
+        <toolbar>
+            <button click.delegate="newConnection()" title="New Connection"><span class="fa fa-plus"></span></button>
+        </toolbar>
+        
+        <div class="button-list">
+            <div repeat.for="conn of connections">
+                <button click.delegate="openConnection(conn)" class="select">${conn.name}</button>
+                <button click.delegate="removeConnection(conn)" class="remove"><span class="fa fa-trash-o"></span></button>
+            </div>
+        </div>
+    </panel>
+</template>

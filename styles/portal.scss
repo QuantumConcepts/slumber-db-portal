@@ -1,4 +1,5 @@
 @import "variables";
+@import "animation";
 
 @mixin heading {
     font-family: "Amaranth", sans-serif;
@@ -6,7 +7,7 @@
 }
 
 @mixin section-shadow {
-    box-shadow: #000 0 0 10px;
+    box-shadow: #000 0 0 40px;
 }
 
 html {
@@ -14,45 +15,325 @@ html {
 }
 
 body {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     height: 100%;
     margin: 0;
-    background-color: $primary4;
+    background-color: $secondary4;
     font-family: "Titillium Web", sans-serif;
     font-weight: normal;
     font-size: 16px;
     
-    header {
+    #loading {
+        position: absolute;
+        display: none;
+        top: inherit;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        z-index: 20;
+            
+        .pong {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: $secondary1;
+            animation-name: loading;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate-reverse;
+            animation-duration: 4s;
+        }
+        
+        &.init {
+            left: 35%;
+            bottom: calc(50% + 4px);
+            width: 30%;
+            height: 8px;
+            background-color: $secondary3;
+        
+            .pong {
+                top: 2px;
+                left: 2px;
+                width: 30px;
+                animation-duration: 1.5s;
+                animation-name: loading-init;
+            }
+        }
+        
+        &.active {
+            display: block;
+        }
+        
+        @keyframes loading-init {
+            to {
+                left: calc(100% - 32px);
+            }
+        }
+        
+        @keyframes loading {
+            to {
+                left: calc(100% - 60px);
+            }
+        }
+    }
+        
+    #logo {
+        @include heading;
+        
+        display: inline-block;
+        margin: 3px 40px 0 0;
+        font-size: 2em;
+        font-weight: 300;
+        color: $secondary2;
+        
+        &:hover {
+            text-decoration: none;
+        }
+        
+        span {
+            display: inline-block;
+        }
+        
+        span:last-child {
+            color: $secondary1;
+        }
+        
+        &.init {
+            position: absolute;
+            bottom: calc(50% + 30px);
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            font-size: 2vw;
+        }
+    }
+    
+    header.page-header.navbar {
         @include section-shadow;
         
-        margin-bottom: 0;
+        z-index: 10;
+        margin: 0;
         border-radius: 0;
         background-color: $secondary3;
         
         a:hover {
             text-decoration: none;
         }
+    }
+    
+    #page-content {
+        z-index: 5;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        flex: 1 0 auto;
+        color: $white;
         
-        #logo {
-            @include heading;
+        panel {
+            $panel-count: 10;
             
-            display: inline-block;
-            margin: 3px 40px 0 0;
-            font-size: 2em;
-            font-weight: 300;
-            color: $secondary2;
+            position: relative;
+            box-sizing: border-box;
+            width: 400px;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px 20px 20px 40px;
+            border: none;
+            border-radius: 0;
+            background-color: $primary3;
+            box-shadow: $primary4 0 0 40px;
+            order: 3;
             
-            span {
-                display: inline-block;
+            &[size=sm] {
+                width: 300px;
             }
             
-            span:last-child {
-                color: $secondary1;
+            &[size=lg] {
+                width: 600px;
+            }
+            
+            &.popout {
+                margin: 50px 0;
+                background-color: $primary2;
+            }
+            
+            &.connections {
+                order: 1;
+            }
+            
+            &.connection-settings {
+                order: 2;
+            }
+            
+            @for $i from 1 through $panel-count {
+                &:nth-child(#{$i}) {
+                    z-index: -$i;
+                }
+            }
+                    
+            &:hover {
+                .panel-header .close-btn {
+                    display: initial;
+                }
+            }
+            
+            header {
+                position: relative;
+                
+                h1 {
+                    margin-top: 0;
+                }
+                    
+                .close-btn {
+                    position: absolute;
+                    display: none;
+                    top: -10px;
+                    right: -10px;
+                    font-size: 12px;
+                    background: transparent;
+                    box-shadow: none;
+                    color: $primary2;
+                    
+                    &:hover {
+                        color: $primary0;
+                    }
+                }
+                
+                + toolbar {
+                    margin-bottom: 5px;
+                }
+            }
+            
+            footer {
+                position: absolute;
+                bottom: 20px;
+                color: $gray5;
+            }
+
+            &.au-enter {
+                color: red;
+            }
+            
+            &.au-enter-active {
+                animation-name: slide-enter;
+                animation-duration: 3s;
+            }
+            
+            &.au-leave {
+                color: green;
+            }
+            
+            &.au-leave-active {
+                animation-name: slide-leave;
+                animation-duration: 2s;
             }
         }
         
+        label {
+            font-weight: normal;
+        }
+        
+        input {
+            background-color: $primary4;
+            border-radius: 0;
+            border-color: $primary3;
+            color: $gray0;
+        }
+        
+        button,
+        a.btn {
+            border: none;
+            box-shadow: $primary4 1px 1px;
+            background-color: $primary2;
+            color: $white;
+            
+            &:hover {
+                background-color: $primary1;
+            }
+        }
+        
+        toolbar {
+            display: block;
+            margin: 0 0 10px 0;
+            
+            button,
+            a.btn {
+                display: inline-block;
+                margin-left: 5px;
+                width: 22px;
+                height: 22px;
+                font-size: 12px;
+                
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+        
+        .button-list {
+            > div {
+                position: relative;
+                
+                .select {
+                    margin-bottom: 10px;
+                    padding: 10px 20px;
+                    width: 100%;
+                }
+                
+                .remove {
+                    display: none;
+                    position: absolute;
+                    top: calc(50% - 17px);
+                    right: -12px;
+                    width: 24px;
+                    height: 24px;
+                    border: solid 1px $primary3;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    box-shadow: none;
+                }
+                
+                &:hover {
+                    .remove {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    
+    footer.page-footer {
+        @include section-shadow;
+        
+        z-index: 10;
+        box-sizing: border-box;
+        background-color: $secondary3;
+        color: $gray1;
+        
+        .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            .nav {
+                flex: 1 1;
+            }
+            
+            .version {
+                flex: 1 1;
+                text-align: right;
+            }
+        }
+    }
+    
+    header,
+    footer {
         .navbar-nav {
             li {
                 a {
@@ -71,19 +352,5 @@ body {
                 }
             }
         }
-    }
-    
-    #body-content {
-        flex: 1 0 auto;
-        color: #fff;
-    }
-    
-    footer {
-        @include section-shadow;
-        
-        flex: none;
-        height: 60px;
-        border-top: solid 1px $secondary4;
-        background-color: $secondary3;
     }
 }

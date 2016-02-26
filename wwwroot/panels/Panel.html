@@ -1,0 +1,8 @@
+<template class="au-animate">
+    <header>
+        <h1>${headerText}</h1>
+        <button if.bind="close" click.delegate="close()" class="close-btn"><span class="fa fa-times"></span></button>
+    </header>
+    
+    <content></content>
+</template>

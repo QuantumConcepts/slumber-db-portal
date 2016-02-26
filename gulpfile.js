@@ -6,6 +6,16 @@ const babel = require("gulp-babel");
 const sass = require("gulp-sass");
 
 const wwwroot = "./wwwroot";
+const jsFiles = function () {
+    var sourceRoot = "./scripts";
+    var sourceFiles = sourceRoot + "/**/*.js";
+    var destRoot = wwwroot;
+    
+    return {
+        source: [sourceFiles],
+        dest: destRoot
+    };
+}();
 const scssFiles = function () {
     var sourceRoot = "./styles";
     var sourceFiles = sourceRoot + "/**/*.scss";
@@ -14,16 +24,6 @@ const scssFiles = function () {
     
     return {
         source: [sourceFiles, sourceIgnore],
-        dest: destRoot
-    };
-}();
-const jsFiles = function () {
-    var sourceRoot = "./scripts";
-    var sourceFiles = sourceRoot + "/**/*.js";
-    var destRoot = wwwroot + "/scripts";
-    
-    return {
-        source: [sourceFiles],
         dest: destRoot
     };
 }();

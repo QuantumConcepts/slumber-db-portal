@@ -8,17 +8,11 @@
     "tasks": [
         {
             "taskName": "build",
-            //"isBuildCommand": true,
-            "isWatching": true
+            "isBuildCommand": true
         },
         {
             "taskName": "build-watch",
             "isBuildCommand": true,
-            "isWatching": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "watch",
             "isWatching": true,
             "showOutput": "always"
         }

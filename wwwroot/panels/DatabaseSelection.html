@@ -1,0 +1,15 @@
+<template>
+    <require from="./Panel"></require>
+    
+    <panel size="sm" header-text="Databases" close.call="close()">
+        <div class="button-list">
+            <div repeat.for="db of databases">
+                <button click.delegate="openDatabase(db)" class="select">${db.name}</button>
+            </div>
+        </div>
+        
+        <footer>
+            ${connectionInfo.name}
+        </footer>
+    </panel>
+</template>

@@ -1,0 +1,17 @@
+@import "variables";
+
+@keyframes slide-enter {
+    from {
+        width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        background-color: $tertiary3;
+    }
+}
+
+@keyframes slide-leave {
+    to {
+        width: 0;
+        background-color: $tertiary3;
+    }
+}
